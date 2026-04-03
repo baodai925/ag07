@@ -1,0 +1,346 @@
+/* =========================
+   1. RESET CƠ BẢN
+   ========================= */
+
+/* Áp dụng cho toàn bộ phần tử */
+* {
+  margin: 0;                      /* bỏ margin mặc định */
+  padding: 0;                     /* bỏ padding mặc định */
+  box-sizing: border-box;         /* width không bị cộng thêm padding */
+  font-family: Arial, sans-serif; /* font mặc định */
+}
+
+/* =========================
+   2. THIẾT LẬP CHUNG
+   ========================= */
+
+body {
+  line-height: 1.6;               /* khoảng cách dòng */
+  color: #222;                    /* màu chữ */
+  background: #f8f9fb;            /* nền sáng */
+}
+
+/* Khối giới hạn nội dung và căn giữa */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* =========================
+   3. HEADER
+   ========================= */
+
+.header {
+  background: #111827;            /* nền tối */
+  color: white;
+  padding: 16px 0;
+}
+
+/* Header desktop: logo trái, menu phải */
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;             /* để nút mobile dễ canh */
+}
+
+/* Logo */
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* =========================
+   4. NÚT MENU MOBILE
+   ========================= */
+
+/* Mặc định ẩn nút menu trên desktop */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* =========================
+   5. MENU CHÍNH
+   ========================= */
+
+/* Chỉ ul cấp 1 mới nằm ngang */
+.nav > ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Mỗi mục menu */
+.nav > ul > li {
+  position: relative;             /* làm mốc cho submenu */
+}
+
+/* Link menu chính */
+.nav > ul > li > a {
+  display: block;
+  padding: 10px 14px;
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+/* Hover menu chính */
+.nav > ul > li > a:hover {
+  opacity: 0.85;
+}
+
+/* =========================
+   6. DROPDOWN
+   ========================= */
+
+/* Menu con mặc định bị ẩn */
+.submenu {
+  display: none;
+  position: absolute;             /* xổ xuống dưới */
+  top: 100%;
+  left: 0;
+
+  min-width: 180px;
+  background: white;
+  list-style: none;
+  padding: 8px 0;
+  margin-top: 8px;
+
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+/* Hover vào mục cha thì hiện menu con */
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* Item trong submenu */
+.submenu li {
+  width: 100%;
+}
+
+/* Link trong submenu */
+.submenu li a {
+  display: block;
+  padding: 12px 16px;
+  color: #222;
+  text-decoration: none;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Hover submenu */
+.submenu li a:hover {
+  background: #f3f4f6;
+}
+
+/* =========================
+   7. HERO
+   ========================= */
+
+.hero {
+  padding: 80px 0;
+  text-align: center;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+}
+
+.hero h2 {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+/* Nút */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: white;
+  color: #4f46e5;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   8. FEATURES
+   ========================= */
+
+.features {
+  padding: 60px 0;
+}
+
+.features h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Grid tự chia cột */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+/* =========================
+   9. FOOTER
+   ========================= */
+
+.footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+/* =========================
+   10. TABLET
+   ========================= */
+
+@media (max-width: 768px) {
+  /* Giảm chữ hero cho tablet */
+  .hero h2 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  /* Grid còn 2 cột */
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================
+   11. MOBILE
+   ========================= */
+
+@media (max-width: 576px) {
+  /* Nút menu hiện ra trên mobile */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Menu mặc định ẩn */
+  .nav {
+    display: none;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  /* Khi JS thêm class .show thì hiện menu */
+  .nav.show {
+    display: block;
+  }
+
+  /* Header xếp dọc */
+  .header .container {
+    flex-wrap: wrap;
+  }
+
+  /* Menu mobile chuyển thành dọc */
+  .nav > ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #111827;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+  }
+
+  /* Mỗi item mobile có đường ngăn */
+  .nav > ul > li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Link menu mobile */
+  .nav > ul > li > a {
+    padding: 14px 12px;
+    text-align: left;
+  }
+
+  /* Trên mobile bỏ xổ absolute, cho submenu nằm bình thường */
+  .submenu {
+    display: block;               /* luôn hiện */
+    position: static;             /* không absolute nữa */
+    min-width: 100%;
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #1f2937;          /* nền submenu tối hơn chút */
+    padding: 0;
+  }
+
+  /* Link submenu mobile */
+  .submenu li a {
+    color: white;
+    padding: 12px 24px;           /* thụt vào để phân biệt menu con */
+    text-align: left;
+  }
+
+  .submenu li a:hover {
+    background: #374151;
+  }
+
+  /* Hero nhỏ lại cho điện thoại */
+  .hero {
+    padding: 50px 0;
+  }
+
+  .hero h2 {
+    font-size: 26px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  /* Grid còn 1 cột */
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}

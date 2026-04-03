@@ -1,0 +1,92 @@
+doctype html
+html(lang="vi")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Trang chủ
+    //- Link CSS
+    link(rel="stylesheet" href="/css/style.css")
+
+  body
+    //- =========================
+    //- HEADER
+    //- =========================
+    header.header
+      .container
+        //- Logo
+        h1.logo AG
+
+        //- Nút menu cho mobile
+        //- onclick gọi hàm toggleMenu() ở cuối trang
+        button.menu-toggle(type="button" onclick="toggleMenu()") ☰
+
+        //- Thanh điều hướng
+        nav.nav#mainNav
+          ul
+            li
+              a(href="#") Trang chủ
+
+            li
+              a(href="#") Giới thiệu
+
+            //- Mục có dropdown
+            li.dropdown
+              a(href="#") Dịch vụ
+
+              //- Menu con
+              ul.submenu
+                li
+                  a(href="#") Gói 1
+                li
+                  a(href="#") Gói 2
+                li
+                  a(href="#") Gói 3
+
+            li
+              a(href="#") Liên hệ
+
+    //- =========================
+    //- HERO
+    //- =========================
+    section.hero
+      .container
+        h2 Thiết kế giao diện với Pug
+        p Nhanh, gọn, dễ đọc và dễ tái sử dụng.
+        a.btn(href="#") Bắt đầu ngay
+
+    //- =========================
+    //- FEATURES
+    //- =========================
+    section.features
+      .container
+        h2 Tính năng nổi bật
+
+        .grid
+          .card
+            h3 Đơn giản
+            p Cú pháp ngắn gọn, dễ viết hơn HTML.
+
+          .card
+            h3 Dễ bảo trì
+            p Phân chia component rõ ràng, tái sử dụng tốt.
+
+          .card
+            h3 Hiện đại
+            p Phù hợp với Node.js, Express và frontend workflow.
+
+    //- =========================
+    //- FOOTER
+    //- =========================
+    footer.footer
+      .container
+        p © 2026 MyWebsite. All rights reserved.
+
+    //- =========================
+    //- JS MENU MOBILE
+    //- =========================
+    script.
+      // Hàm bật/tắt menu mobile
+      function toggleMenu() {
+        const nav = document.getElementById('mainNav');
+        nav.classList.toggle('show');
+      }
