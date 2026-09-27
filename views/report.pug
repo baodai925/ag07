@@ -1,0 +1,22 @@
+extends layout
+include partials/attendance-table
+
+block content
+  section.page
+    .container
+      h2 Báo cáo chấm công
+
+      form.filters(method="get" action="/bao-cao")
+        label
+          | Từ ngày
+          input(type="date" name="from" value=from)
+        label
+          | Đến ngày
+          input(type="date" name="to" value=to)
+        button.btn.primary(type="submit") Xem
+        a.btn.secondary(href=`/api/attendance?format=csv&from=${from}&to=${to}`) Xuất Excel (CSV)
+
+      p.muted
+        | #{rows.length} lượt · Giờ làm: #{workStart} – #{workEnd}
+
+      +attendanceTable(rows, true)

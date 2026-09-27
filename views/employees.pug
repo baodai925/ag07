@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  section.page
+    .container
+      h2 Nhân viên
+
+      .two-col
+        .panel
+          h3 Đăng ký khuôn mặt
+          .camera.small
+            video#video(autoplay muted playsinline)
+            canvas#overlay
+            .camera-status#status Đang tải mô hình nhận diện…
+
+          form#registerForm.form
+            label
+              | Mã nhân viên
+              input(name="code" required placeholder="VD: NV001")
+            label
+              | Họ tên
+              input(name="name" required placeholder="VD: Nguyễn Văn A")
+            label
+              | Phòng ban
+              input(name="department" placeholder="VD: Kế toán")
+
+            .samples
+              span Mẫu khuôn mặt: 
+              strong#sampleCount 0
+              |  / 
+              span#sampleTarget 5
+            p.muted Bấm “Chụp mẫu” 5 lần, mỗi lần xoay mặt nhẹ (thẳng, trái, phải, ngẩng, cúi) để nhận diện chính xác hơn.
+
+            .actions
+              button.btn.secondary#captureBtn(type="button" disabled) Chụp mẫu
+              button.btn.secondary#resetBtn(type="button") Làm lại
+              button.btn.primary#saveBtn(type="submit" disabled) Lưu nhân viên
+            p.message#message
+
+        .panel
+          h3 Danh sách (#{employees.length})
+          if employees.length === 0
+            p.empty Chưa có nhân viên nào.
+          else
+            .table-wrap
+              table.table
+                thead
+                  tr
+                    th Mã NV
+                    th Họ tên
+                    th Phòng ban
+                    th Mẫu
+                    th
+                tbody
+                  each e in employees
+                    tr
+                      td= e.code
+                      td= e.name
+                      td= e.department
+                      td= e.samples
+                      td
+                        button.link-danger(type="button" data-delete=e.id data-name=e.name) Xoá
+
+block scripts
+  script(src="/vendor/face-api/face-api.js")
+  script(src="/js/face.js")
+  script(src="/js/register.js")

@@ -1,0 +1,35 @@
+mixin attendanceTable(rows, showDate)
+  if rows.length === 0
+    p.empty Chưa có dữ liệu chấm công.
+  else
+    .table-wrap
+      table.table
+        thead
+          tr
+            if showDate
+              th Ngày
+            th Mã NV
+            th Họ tên
+            th Phòng ban
+            th Giờ vào
+            th Giờ ra
+            th Số giờ
+            th Trạng thái
+        tbody
+          each r in rows
+            tr
+              if showDate
+                td= r.date
+              td= r.code
+              td= r.name
+              td= r.department
+              td= r.checkIn
+              td= r.checkOut || '—'
+              td= r.hours === null ? '—' : r.hours
+              td
+                if r.late
+                  span.badge.warn Đi muộn
+                if r.earlyLeave
+                  span.badge.bad Về sớm
+                if !r.late && !r.earlyLeave
+                  span.badge.ok Đúng giờ

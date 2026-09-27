@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  section.page
+    .container
+      h2 Chấm công
+      p.muted Đứng trước camera, nhìn thẳng. Lần nhận diện đầu tiên trong ngày là giờ vào, các lần sau (cách nhau ≥ 1 phút) cập nhật giờ ra.
+
+      .kiosk
+        .camera
+          video#video(autoplay muted playsinline)
+          canvas#overlay
+          .camera-status#status Đang tải mô hình nhận diện…
+        aside.kiosk-side
+          .clock#clock --:--:--
+          .result#result
+            p.muted Chưa nhận diện
+          h3 Lượt chấm gần đây
+          ul.log#log
+
+block scripts
+  script(src="/vendor/face-api/face-api.js")
+  script(src="/js/face.js")
+  script(src="/js/checkin.js")

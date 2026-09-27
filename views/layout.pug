@@ -1,0 +1,39 @@
+doctype html
+html(lang="vi")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title #{title ? title + ' · ' : ''}CamVision Chấm công
+    link(rel="stylesheet" href="/css/style.css")
+
+  body
+    header.header
+      .container
+        h1.logo
+          a(href="/") CamVision
+
+        button.menu-toggle(type="button" onclick="toggleMenu()") ☰
+
+        nav.nav#mainNav
+          ul
+            li
+              a(href="/" class=page === 'home' ? 'active' : '') Tổng quan
+            li
+              a(href="/cham-cong" class=page === 'checkin' ? 'active' : '') Chấm công
+            li
+              a(href="/nhan-vien" class=page === 'employees' ? 'active' : '') Nhân viên
+            li
+              a(href="/bao-cao" class=page === 'report' ? 'active' : '') Báo cáo
+
+    main.main
+      block content
+
+    footer.footer
+      .container
+        p © 2026 CamVision · Chấm công bằng nhận diện khuôn mặt
+
+    script.
+      function toggleMenu() {
+        document.getElementById('mainNav').classList.toggle('show');
+      }
+    block scripts

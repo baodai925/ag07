@@ -1,17 +1,19 @@
 {
-  "name": "ag07",
+  "name": "camvision-attendance",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Chấm công bằng nhận diện khuôn mặt qua camera (Express + Pug + face-api.js)",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@vladmandic/face-api": "^1.7.15",
     "express": "^5.2.1",
     "pug": "^3.0.4"
   },
