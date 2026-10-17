@@ -1,0 +1,54 @@
+# Xiaozhi AI chạy hoàn toàn offline: ASR (whisper.cpp) + LLM (Ollama) + TTS (Piper)
+# Model được lưu trong ./data, tải trước bằng scripts/download-models.sh
+services:
+  xiaozhi:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      PORT: 3000
+      PUBLIC_WS_URL: ${PUBLIC_WS_URL:-}
+      AUTH_TOKEN: ${AUTH_TOKEN:-}
+      ASR_TYPE: whispercpp
+      ASR_URL: http://whisper:8080
+      ASR_LANGUAGE: ${ASR_LANGUAGE:-vi}
+      LLM_URL: http://ollama:11434/v1
+      LLM_MODEL: ${LLM_MODEL:-qwen2.5:3b}
+      TTS_TYPE: piper
+      TTS_URL: http://piper:5000/synthesize
+    depends_on:
+      - whisper
+      - ollama
+      - piper
+
+  whisper:
+    image: ghcr.io/ggml-org/whisper.cpp:main
+    restart: unless-stopped
+    environment:
+      WHISPER_MODEL: ${WHISPER_MODEL:-ggml-small.bin}
+    command: ["./build/bin/whisper-server --host 0.0.0.0 --port 8080 -m /models/$$WHISPER_MODEL"]
+    volumes:
+      - ./data/whisper:/models
+
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    volumes:
+      - ./data/ollama:/root/.ollama
+    # Có GPU NVIDIA thì bỏ comment phần dưới (cần nvidia-container-toolkit)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  piper:
+    build: ./docker/piper
+    restart: unless-stopped
+    environment:
+      PIPER_VOICE: ${PIPER_VOICE:-vi_VN-vais1000-medium}
+    volumes:
+      - ./data/piper:/data

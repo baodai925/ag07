@@ -1,11 +1,12 @@
 {
   "name": "ag07",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Server AI local (offline) cho thiết bị Xiaozhi ESP32",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "node app.js",
+    "test-client": "node scripts/test-client.js"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +14,9 @@
   "type": "commonjs",
   "dependencies": {
     "express": "^5.2.1",
-    "pug": "^3.0.4"
+    "opusscript": "^0.1.1",
+    "pug": "^3.0.4",
+    "ws": "^8.22.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
